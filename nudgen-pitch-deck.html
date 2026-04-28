@@ -370,6 +370,39 @@
       margin: 0; justify-content: flex-start;
     }
 
+    @media print {
+      @page {
+        size: 16in 9in;
+        margin: 0;
+      }
+      html { font-size: 120%; }
+      body {
+        overflow: visible;
+        background: var(--background);
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+      .deck {
+        width: 16in;
+        height: auto;
+        overflow: visible;
+      }
+      .slide,
+      .slide.active,
+      .slide.prev {
+        position: relative;
+        width: 16in;
+        height: 9in;
+        page-break-after: always;
+        break-after: page;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .slide:last-of-type { page-break-after: auto; break-after: auto; }
+      .nav, .dots, .kbd-hint { display: none !important; }
+    }
+
     /* ── Nav ── */
     .nav {
       position: fixed; bottom: var(--s8); left: 50%; transform: translateX(-50%);
