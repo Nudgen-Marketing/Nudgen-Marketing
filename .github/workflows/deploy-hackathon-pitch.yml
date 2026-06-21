@@ -32,25 +32,17 @@ jobs:
       - name: Build static site artifact
         run: |
           mkdir -p site
-          cp hackathon-pitch.html site/
-          cp nudgen-pitch-deck.html site/
-          cat > site/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <title>Nudgen Decks</title>
-            </head>
-            <body>
-              <h1>Nudgen Pitch Decks</h1>
-              <ul>
-                <li><a href="./hackathon-pitch.html">Hackathon Pitch</a></li>
-                <li><a href="./nudgen-pitch-deck.html">Nudgen Pitch Deck</a></li>
-              </ul>
-            </body>
-          </html>
-          HTML
+          # Default route (/) serves nudgen-pitch-deck.html
+          cp nudgen-pitch-deck.html site/index.html
+          cp nudgen-pitch-deck.html site/nudgen-pitch-deck.html
+          
+          # /hackathon route serves hackathon-pitch.html
+          cp hackathon-pitch.html site/hackathon.html
+          mkdir -p site/hackathon
+          cp hackathon-pitch.html site/hackathon/index.html
+          
+          # Keep original filename for backward compatibility
+          cp hackathon-pitch.html site/hackathon-pitch.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
