@@ -43,6 +43,9 @@ jobs:
           
           # Keep original filename for backward compatibility
           cp hackathon-pitch.html site/hackathon-pitch.html
+          
+          # Copy assets directory so that favicon and og-image are deployed
+          cp -r assets site/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
